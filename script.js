@@ -6,20 +6,26 @@ const display = document.querySelector("#display");
 
 const numBtn = document.querySelectorAll(".num");
 numBtn.forEach(button => button.addEventListener("click", () => {
-    display.innerHTML += `${button.innerHTML}`;
-    num += button.innerHTML;
+    if (operators[0] === "=") {
+        operators.shift();
+        num = button.innerHTML;
+        display.innerHTML = `${button.innerHTML}`;
+    } else {
+        display.innerHTML += `${button.innerHTML}`;
+        num += button.innerHTML;
+    }
 }));
 
 const opBtn = document.querySelectorAll(".op");
 opBtn.forEach(button => button.addEventListener("click", () => {
-    if (num === "") {
-        operators.push(button.innerHTML);
-    } else {
-        numbers.push(parseInt(num));
-        operators.push(button.innerHTML);
-        num = "";
+    if (operators[0] === "=") {
+        operators.shift();
     }
     
+    numbers.push(parseInt(num));
+    operators.push(button.innerHTML);
+    num = "";
+
     display.innerHTML += ` ${button.innerHTML} `;
     console.table(numbers);
 }));
@@ -30,23 +36,44 @@ equalsBtn.addEventListener("click", () => {
         return;
     } else {
         numbers.push(parseInt(num));
+        
         let result = Math.round(numbers.reduce(operate) * 100) / 100;
-
-        console.log(result);
         display.innerHTML = result;
-        num = "";
+        
         numbers = [];
-        numbers.push(result);
+        num = result.toString();
+
+        operators.push("=");
     }
 });
 
 const clearBtn = document.querySelector("#clear");
-clearBtn.addEventListener("click", () => {
+clearBtn.addEventListener("click", clearCalc)
+
+function clearCalc() {
     operators = [];
     numbers = [];
     num = "";
     display.innerHTML = "";
-})
+}
+
+function operate (a, b) {
+    let op = operators[0];
+    console.log(numbers);
+    if (op === "+") {
+        operators.shift();
+        return(add(a, b));
+    } else if (op === "-") {
+        operators.shift();
+        return subtract(a, b);
+    } else if (op === "*") {
+        operators.shift();
+        return multiply(a, b);
+    } else if (op === "/") {
+        operators.shift();
+        return divide(a, b);
+    }
+}
 
 function add(a, b) {
     return a + b;
@@ -62,22 +89,4 @@ function multiply(a, b) {
 
 function divide(a, b) {
     return a / b;
-}
-
-function operate (a, b) {
-    let op = operators[0];
-    
-    if (op === "+") {
-        operators.shift();
-        return(add(a, b));
-    } else if (op === "-") {
-        operators.shift();
-        return subtract(a, b);
-    } else if (op === "*") {
-        operators.shift();
-        return multiply(a, b);
-    } else if (op === "/") {
-        operators.shift();
-        return divide(a, b);
-    }
 }
