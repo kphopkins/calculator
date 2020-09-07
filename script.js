@@ -13,7 +13,7 @@ numBtn.forEach(button => button.addEventListener("click", () => {
         num = button.innerHTML;
         display.innerHTML = `${button.innerHTML}`;
     } else {
-        if (display.innerHTML.includes(".") && button.innerHTML == ".") {
+        if (num.includes(".") && button.innerHTML == ".") {
             return;
         } else {
             display.innerHTML += `${button.innerHTML}`;
@@ -33,9 +33,7 @@ opBtn.forEach(button => button.addEventListener("click", () => {
     numbers.push(Number(num));
     operators.push(button.innerHTML);
     num = "";
-
     display.innerHTML += `${button.innerHTML}`;
-    console.table(numbers);
 
     lastClicked = "op";
 }));
@@ -51,7 +49,7 @@ equalsBtn.addEventListener("click", () => {
         
         num = result.toString();
         if (num == "NaN") {
-            display.innerHTML = "Whoops!<br> Computers can't divide by 0.";
+            display.innerHTML = "<p style='font-size: 18px;'>Can't divide by 0. Try again.</p>";
         } else {
             display.innerHTML = result;
         }
@@ -90,7 +88,7 @@ delBtn.addEventListener("click", () => {
 
 function operate (a, b) {
     let op = operators[0];
-    console.log(numbers);
+
     if (op === "+") {
         operators.shift();
         return(add(a, b));
