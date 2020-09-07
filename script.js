@@ -21,8 +21,8 @@ opBtn.forEach(button => button.addEventListener("click", () => {
     if (operators[0] === "=") {
         operators.shift();
     }
-    
-    numbers.push(parseInt(num));
+
+    numbers.push(Number(num));
     operators.push(button.innerHTML);
     num = "";
 
@@ -35,7 +35,7 @@ equalsBtn.addEventListener("click", () => {
     if (numbers.length == 0) {
         return;
     } else {
-        numbers.push(parseInt(num));
+        numbers.push(Number(num));
         
         let result = Math.round(numbers.reduce(operate) * 100) / 100;
         display.innerHTML = result;
