@@ -22,8 +22,8 @@ body {
         "seven eight nine divide"
         "four five six multiply"
         "one two three subtract"
-        ". zero point add"
-        "clear clear clear equals";
+        "del zero point add"
+        "clear clear equals equals";
     justify-items: center;
     align-items: center;
 }
@@ -111,11 +111,18 @@ button {
 
 #equals {
     grid-area: equals;
+    width: 175px;
+    border: 1px solid lightgray;
+    border-radius: 40px;
 }
 
 #clear {
     grid-area: clear;
-    width: 250px;
+    width: 175px;
     border: 1px solid lightgray;
     border-radius: 40px;
+}
+
+#del {
+    grid-area: del;
 }
