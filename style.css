@@ -1,10 +1,8 @@
 body {
     box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin: 0;
     font-family: Verdana, sans-serif;
+    display: block;
 }
 
 #calculator {
@@ -13,8 +11,10 @@ body {
     border-radius: 15px;
     width: 400px;
     height: 500px;
-    margin-top: 150px;
     padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10vh;
     display: grid;
     grid-template-areas:
         "display display display display"
@@ -53,7 +53,14 @@ button {
     box-sizing: border-box;
     grid-area: display;
     text-align: right;
+    overflow-y: hidden;
+    overflow-x: auto;
 }
+
+::-webkit-scrollbar-thumb {
+    background: #e65c00;
+    border-radius: 10px;
+  }
 
 #one {
     grid-area: one;
